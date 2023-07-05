@@ -22,19 +22,32 @@ export const ProfileInformation = ({ userData }) => {
     );
   }
   // eslint-disable-next-line no-unused-vars
-  const { email, firstName, lastName, phone: _phone, city } = userData;
+  const { emailInput, firstNameInput, lastNameInput, phone: phoneInput, cityInput } = userData;
+
+  console.log(emailInput);
+  const formatPhoneNumber = (phoneNumber) => {
+
+    const firstTwo = phoneNumber.substring(0, 2);
+    console.log(firstTwo)
+    const middleTwo = phoneNumber.substring(2, 4);
+    const middleMiddleTwo = phoneNumber.substring(4, 6);
+    const lastNumber = phoneNumber.substring(6, 7);
+    return `${firstTwo}-${middleTwo}-${middleMiddleTwo}-${lastNumber}` 
+  }
+
   return (
     <>
       <u>
         <h3>Your Submitted User Information</h3>
       </u>
       <div className="user-info">
-        <InfoRow label="Email" value={email} />
-        <InfoRow label="First Name" value={firstName} />
-        <InfoRow label="Last Name" value={lastName} />
-        <InfoRow label="City" value={city} />
+        <InfoRow label="Email" value={emailInput} />
+        <InfoRow label="First Name" value={firstNameInput} />
+        <InfoRow label="Last Name" value={lastNameInput} />
+        <InfoRow label="City" value={cityInput} />
         {/* You will need to format the string "nnnnnnn" as "nn-nn-nn-n" */}
-        <InfoRow label="Phone" value={"12-34-56-7"} />
+        {/* <InfoRow label="Phone" value={formatPhoneNumber(phoneInput)} /> */}
+        <InfoRow label="Phone" value={phoneInput} />
       </div>
     </>
   );
