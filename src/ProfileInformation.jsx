@@ -8,7 +8,7 @@ export const InfoRow = ({ label, value }) => {
     </div>
   );
 };
-export const ProfileInformation = ({ userData }) => {
+export const ProfileInformation = ({ userData, isSubmit, setIsSubmit }) => {
   if (!userData) {
     return (
       <>
@@ -22,18 +22,7 @@ export const ProfileInformation = ({ userData }) => {
     );
   }
   // eslint-disable-next-line no-unused-vars
-  const { emailInput, firstNameInput, lastNameInput, phone: phoneInput, cityInput } = userData;
-
-  console.log(emailInput);
-  const formatPhoneNumber = (phoneNumber) => {
-
-    const firstTwo = phoneNumber.substring(0, 2);
-    console.log(firstTwo)
-    const middleTwo = phoneNumber.substring(2, 4);
-    const middleMiddleTwo = phoneNumber.substring(4, 6);
-    const lastNumber = phoneNumber.substring(6, 7);
-    return `${firstTwo}-${middleTwo}-${middleMiddleTwo}-${lastNumber}` 
-  }
+  const { email, firstName, lastName, phoneNumber , city } = userData;
 
   return (
     <>
@@ -41,13 +30,13 @@ export const ProfileInformation = ({ userData }) => {
         <h3>Your Submitted User Information</h3>
       </u>
       <div className="user-info">
-        <InfoRow label="Email" value={emailInput} />
-        <InfoRow label="First Name" value={firstNameInput} />
-        <InfoRow label="Last Name" value={lastNameInput} />
-        <InfoRow label="City" value={cityInput} />
+        <InfoRow label="Email" value={isSubmit? email : 'default'} />
+        <InfoRow label="First Name" value={isSubmit? firstName : 'default'} />
+        <InfoRow label="Last Name" value={isSubmit? lastName : 'default'} />
+        <InfoRow label="City" value={isSubmit? city : 'default'} />
         {/* You will need to format the string "nnnnnnn" as "nn-nn-nn-n" */}
         {/* <InfoRow label="Phone" value={formatPhoneNumber(phoneInput)} /> */}
-        <InfoRow label="Phone" value={phoneInput} />
+        <InfoRow label="Phone" value={isSubmit? `${phoneNumber[0]}-${phoneNumber[1]}-${phoneNumber[2]}-${phoneNumber[3]}` : 'default'} />
       </div>
     </>
   );

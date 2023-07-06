@@ -3,24 +3,20 @@ import { ProfileInformation } from "../ProfileInformation";
 import { FunctionalForm } from "./FunctionalForm";
 
 export const FunctionalApp = () => {
-
-
   const [firstNameInput, setFirstNameInput] = useState('');
   const [lastNameInput, setLastNameInput] = useState('');
   const [emailInput, setEmailInput] = useState('');
   const [cityInput, setCityInput] = useState('');
   const [phoneInputState, setPhoneInputState] = useState(['', '', '', '']);
-  // const [isSubmit, setIsSubmit] = useState(false);
-
+  const [isSubmit, setIsSubmit] = useState(false);
 
   const userData = {
-    'Email': emailInput,
-    'First Name': firstNameInput,
-    'Last Name': lastNameInput,
-    'City': cityInput,
-    'Phone Number': phoneInputState, 
+    email : emailInput,
+    firstName : firstNameInput,
+    lastName : lastNameInput,
+    city: cityInput,
+    phoneNumber: phoneInputState, 
   }
-
 
   return (
     <>
@@ -30,7 +26,11 @@ export const FunctionalApp = () => {
         :
         <ProfileInformation userData={null} />
       } */}
-      <ProfileInformation userData={userData} />
+      <ProfileInformation 
+        userData={userData} 
+        isSubmit= {isSubmit}
+        setIsSubmit={setIsSubmit}
+      />
       <FunctionalForm
         firstNameInput={firstNameInput}
         lastNameInput={lastNameInput}
@@ -42,6 +42,8 @@ export const FunctionalApp = () => {
         setEmailInput={setEmailInput}
         setCityInput={setCityInput}
         setPhoneInputState={setPhoneInputState}
+        isSubmit= {isSubmit}
+        setIsSubmit={setIsSubmit}
       />
     </>
   );

@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, } from "react";
 import { ErrorMessage } from "../ErrorMessage";
 
 const firstNameErrorMessage = "First name must be at least 2 characters long";
@@ -20,15 +20,11 @@ export const FunctionalForm = ({
   cityInput,
   setCityInput,
   phoneInputState,
-  setPhoneInputState
+  setPhoneInputState,
+  isSubmit, 
+  setIsSubmit
 }) => {
-  // const [firstNameInput, setFirstNameInput] = useState('');
-  // const [lastNameInput, setLastNameInput] = useState('');
-  // const [emailInput, setEmailInput] = useState('');
-  // const [cityInput, setCityInput] = useState('');
-  const [isSubmit, setIsSubmit] = useState(false);
 
-  // const [phoneInputState, setPhoneInputState] = useState(["", "", "", ""]);
   const refs = [useRef(), useRef(), useRef(), useRef()];
 
   const ref0 = refs[0];
@@ -95,7 +91,7 @@ export const FunctionalForm = ({
         <input
           placeholder="Bilbo"
           onChange={(e) => setFirstNameInput(e.target.value)}
-          value={firstNameInput}
+          value={isSubmit === true ? '' : firstNameInput}
         />
       </div>
       {showFirstNameError && (
@@ -111,7 +107,7 @@ export const FunctionalForm = ({
         <input
           placeholder="Baggins"
           onChange={(e) => setLastNameInput(e.target.value)}
-          value={lastNameInput}
+          value={isSubmit === true ? '' : lastNameInput}
         />
       </div>
       {showLastNameError && (
@@ -124,7 +120,7 @@ export const FunctionalForm = ({
         <input
           placeholder="bilbo-baggins@adventurehobbits.net"
           onChange={(e) => setEmailInput(e.target.value)}
-          value={emailInput}
+          value={isSubmit === true ? '' : emailInput}
         />
       </div>
       {showEmailError && (
@@ -137,7 +133,8 @@ export const FunctionalForm = ({
         <input
           placeholder="Hobbiton"
           onChange={(e) => setCityInput(e.target.value)}
-          value={cityInput}
+          // value={cityInput}
+          value={isSubmit === true ? '' : cityInput}
         />
       </div>
       {showCityError && (
@@ -151,7 +148,7 @@ export const FunctionalForm = ({
             type="text"
             id="phone-input-1"
             placeholder="55"
-            value={phoneInputState[0].slice(0, 2)}
+            value= {isSubmit === true ? '' : phoneInputState[0].slice(0, 2)}
             onChange={createOnChangeHandler(0)}
             ref={ref0}
           />
@@ -160,7 +157,7 @@ export const FunctionalForm = ({
             type="text"
             id="phone-input-2"
             placeholder="55"
-            value={phoneInputState[1]}
+            value={isSubmit === true ? '' : phoneInputState[1].slice(0, 2)}
             onChange={createOnChangeHandler(1)}
             ref={ref1}
           />
@@ -169,7 +166,7 @@ export const FunctionalForm = ({
             type="text"
             id="phone-input-3"
             placeholder="55"
-            value={phoneInputState[2]}
+            value={isSubmit === true ? '' : phoneInputState[2].slice(0, 2)}
             onChange={createOnChangeHandler(2)}
             ref={ref2}
           />
@@ -178,7 +175,7 @@ export const FunctionalForm = ({
             type="text"
             id="phone-input-4"
             placeholder="5"
-            value={phoneInputState[3]}
+            value={isSubmit === true ? '' : phoneInputState[3].slice(0, 2)}
             onChange={createOnChangeHandler(3)}
             ref={ref3}
           />
