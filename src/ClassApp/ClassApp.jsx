@@ -12,11 +12,11 @@ const defaultUser = {
 
 export class ClassApp extends Component {
   state = {
-    emailInput: '',
-    firstNameInput: '',
-    lastNameInput: '',
-    phoneNumberInput: ['', '', '', ''],
-    cityInput: '',
+    email: '',
+    firstName: '',
+    lastName: '',
+    phoneNumber: ['', '', '', ''],
+    city: '',
     isSubmit: false,
   }
 
@@ -24,8 +24,13 @@ export class ClassApp extends Component {
     this.setState({[state]: value})
   }
 
+  onSubmitFunc = (bool) => {
+    this.setState({isSubmit: bool})
+  }
+
   render() {
-    const {emailInput, firstNameInput, lastNameInput, cityInput, phoneNumberInput, isSubmit} = this.state
+    const {email, firstName, lastName, city, phoneNumber, isSubmit} = this.state;
+    console.log({...this.state})
     return (
       <>
         <h2>Class</h2>
@@ -33,11 +38,12 @@ export class ClassApp extends Component {
           userData={
             // toggle the following lines to change
             // null
-            defaultUser
+            isSubmit ? { ...this.state } : defaultUser
           }
         />
-        <ClassForm emailInput={emailInput} firstNameInput={firstNameInput} lastNameInput={lastNameInput} phoneNumberInput={phoneNumberInput} cityInput ={cityInput} isSubmit={isSubmit}
+        <ClassForm emailInput={email} firstNameInput={firstName} lastNameInput={lastName} phoneNumberInput={phoneNumber} cityInput ={city} isSubmit={isSubmit}
         onChangeState={this.onChangeState}
+        onSubmitFunc={this.onSubmitFunc}
         />
       </>
     );

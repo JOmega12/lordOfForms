@@ -10,10 +10,14 @@ const phoneNumberErrorMessage = "Invalid Phone Number";
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const cityRegex = /^[a-zA-Z\s]+$/;
 
-//why are the errors not showing up? 
+//current bug problem for class and func comps
+//when click with errors, the value doesnt work
+//need to change that
+
+//currently need to put the data when submitted from classApp to profile
 export class ClassForm extends Component {
   render() {
-    const {emailInput,firstNameInput, lastNameInput, phoneNumberInput, cityInput, isSubmit, onChangeState} = this.props;
+    const {emailInput,firstNameInput, lastNameInput, phoneNumberInput, cityInput, isSubmit, onChangeState, onSubmitFunc} = this.props;
 
     const refs = [createRef(), createRef(), createRef(), createRef()];
 
@@ -26,14 +30,14 @@ export class ClassForm extends Component {
     const lastNameValid = lastNameInput.length < 2;
     const emailValid = emailRegex.test(emailInput);
     const cityValid = cityRegex.test(cityInput);
-    // const phoneNumberValue = phoneNumberInput.join("");
+    const phoneNumberValue = phoneNumberInput.join("");
   
     // console.log(phoneNumberInput, 'phonenumberinput')
     const showFirstNameError = isSubmit && firstNameValid;
     const showLastNameError = isSubmit && lastNameValid;
     const showEmailError = isSubmit && !emailValid;
     const showCityError = isSubmit && !cityValid;
-    // const showPhoneError = isSubmit && phoneNumberValue.length !== 7;
+    const showPhoneError = isSubmit && phoneNumberValue.length !== 7;
   
     const createOnChangeHandler = (index, stateKey) => (e) => {
       const lengths = [2, 2, 2, 1];
@@ -64,6 +68,7 @@ export class ClassForm extends Component {
       <form 
       onSubmit={ (e)=> {
         e.preventDefault(e)
+        onSubmitFunc(true);
       }}
       >
         <u>
@@ -74,7 +79,7 @@ export class ClassForm extends Component {
         <div className="input-wrap">
           <label>{"First Name"}:</label>
           <input placeholder="Bilbo" 
-            onChange={(e) => onChangeState('firstNameInput', e.target.value)}
+            onChange={(e) => onChangeState('firstName', e.target.value)}
             value={isSubmit === true ? "" : firstNameInput}
           />
           
@@ -87,7 +92,7 @@ export class ClassForm extends Component {
         <div className="input-wrap">
           <label>{"Last Name"}:</label>
           <input placeholder="Baggins" 
-          onChange={(e) => onChangeState("lastNameInput", e.target.value)}
+          onChange={(e) => onChangeState("lastName", e.target.value)}
           value={isSubmit === true ? "" : lastNameInput}
           />
         </div>
@@ -99,7 +104,7 @@ export class ClassForm extends Component {
         <div className="input-wrap">
           <label>{"Email"}:</label>
           <input placeholder="bilbo-baggins@adventurehobbits.net" 
-          onChange={(e) => onChangeState("emailInput", e.target.value)}
+          onChange={(e) => onChangeState("email", e.target.value)}
           value={isSubmit === true ? "" : emailInput}
           />
         </div>
@@ -111,7 +116,7 @@ export class ClassForm extends Component {
         <div className="input-wrap">
           <label>{"City"}:</label>
           <input placeholder="Hobbiton" 
-          onChange={(e) => onChangeState("cityInput", e.target.value)}
+          onChange={(e) => onChangeState("city", e.target.value)}
           value={isSubmit === true ? "" : cityInput}
           />
         </div>
@@ -124,33 +129,33 @@ export class ClassForm extends Component {
           <div id="phone-input-wrap">
             <input type="text" id="phone-input-1" placeholder="55" 
             value={isSubmit === true? '' : phoneNumberInput[0]}
-            onChange={createOnChangeHandler(0, 'phoneNumberInput')}
+            onChange={createOnChangeHandler(0, 'phoneNumber')}
             ref={ref0}
             />
             -
             <input type="text" id="phone-input-2" placeholder="55" 
             value={isSubmit === true? '' : phoneNumberInput[1]}
-            onChange={createOnChangeHandler(1, 'phoneNumberInput')}
+            onChange={createOnChangeHandler(1, 'phoneNumber')}
             ref={ref1}
             />
             -
             <input type="text" id="phone-input-3" placeholder="55" 
             value={isSubmit === true? '' : phoneNumberInput[2]}
-            onChange={createOnChangeHandler(2, 'phoneNumberInput')}
+            onChange={createOnChangeHandler(2, 'phoneNumber')}
             ref={ref2}
             />
             -
             <input type="text" id="phone-input-4" placeholder="5" 
             value={isSubmit === true? '' : phoneNumberInput[3]}
-            onChange={createOnChangeHandler(3, 'phoneNumberInput')}
+            onChange={createOnChangeHandler(3, 'phoneNumber')}
             ref={ref3}
             />
           </div>
         </div>
 
-        {/* {showPhoneError && (
+        {showPhoneError && (
         <ErrorMessage message={phoneNumberErrorMessage} show={showPhoneError} />
-        )} */}
+        )}
 
         <input type="submit" value="Submit" />
       </form>
