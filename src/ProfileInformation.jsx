@@ -8,7 +8,7 @@ export const InfoRow = ({ label, value }) => {
     </div>
   );
 };
-export const ProfileInformation = ({ userData, isSubmit, setIsSubmit }) => {
+export const ProfileInformation = ({ userData, isSubmit }) => {
   if (!userData) {
     return (
       <>

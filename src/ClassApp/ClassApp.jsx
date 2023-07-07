@@ -11,7 +11,21 @@ const defaultUser = {
 };
 
 export class ClassApp extends Component {
+  state = {
+    emailInput: '',
+    firstNameInput: '',
+    lastNameInput: '',
+    phoneNumberInput: ['', '', '', ''],
+    cityInput: '',
+    isSubmit: false,
+  }
+
+  onChangeState = (state, value ) => {
+    this.setState({[state]: value})
+  }
+
   render() {
+    const {emailInput, firstNameInput, lastNameInput, cityInput, phoneNumberInput, isSubmit} = this.state
     return (
       <>
         <h2>Class</h2>
@@ -22,7 +36,9 @@ export class ClassApp extends Component {
             defaultUser
           }
         />
-        <ClassForm />
+        <ClassForm emailInput={emailInput} firstNameInput={firstNameInput} lastNameInput={lastNameInput} phoneNumberInput={phoneNumberInput} cityInput ={cityInput} isSubmit={isSubmit}
+        onChangeState={this.onChangeState}
+        />
       </>
     );
   }
