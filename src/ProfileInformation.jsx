@@ -9,7 +9,7 @@ export const InfoRow = ({ label, value }) => {
   );
 };
 export const ProfileInformation = ({ userData, isSubmit }) => {
-  if (!userData) {
+  if (!userData || !isSubmit) {
     return (
       <>
         <u>
@@ -23,7 +23,6 @@ export const ProfileInformation = ({ userData, isSubmit }) => {
   }
   // eslint-disable-next-line no-unused-vars
   const { email, firstName, lastName, phoneNumber , city } = userData;
-
   return (
     <>
       <u>

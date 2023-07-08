@@ -20,6 +20,16 @@ export class ClassApp extends Component {
     isSubmit: false,
   }
 
+  resetState = () => {
+    this.setState({
+      email: '',
+      firstName: '',
+      lastName: '',
+      phoneNumber: ['', '', '', ''],
+      city: '',
+    })
+  }
+
   onChangeState = (state, value ) => {
     this.setState({[state]: value})
   }
@@ -30,7 +40,6 @@ export class ClassApp extends Component {
 
   render() {
     const {email, firstName, lastName, city, phoneNumber, isSubmit} = this.state;
-    console.log({...this.state})
     return (
       <>
         <h2>Class</h2>
@@ -40,10 +49,12 @@ export class ClassApp extends Component {
             // null
             isSubmit ? { ...this.state } : defaultUser
           }
+          isSubmit={isSubmit}
         />
         <ClassForm emailInput={email} firstNameInput={firstName} lastNameInput={lastName} phoneNumberInput={phoneNumber} cityInput ={city} isSubmit={isSubmit}
         onChangeState={this.onChangeState}
         onSubmitFunc={this.onSubmitFunc}
+        resetState={this.resetState}
         />
       </>
     );

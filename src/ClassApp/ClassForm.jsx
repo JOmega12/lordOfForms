@@ -9,15 +9,10 @@ const phoneNumberErrorMessage = "Invalid Phone Number";
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const cityRegex = /^[a-zA-Z\s]+$/;
-
-//current bug problem for class and func comps
-//when click with errors, the value doesnt work
-//need to change that
-
 //currently need to put the data when submitted from classApp to profile
 export class ClassForm extends Component {
   render() {
-    const {emailInput,firstNameInput, lastNameInput, phoneNumberInput, cityInput, isSubmit, onChangeState, onSubmitFunc} = this.props;
+    const {emailInput,firstNameInput, lastNameInput, phoneNumberInput, cityInput, isSubmit, onChangeState, onSubmitFunc, resetState} = this.props;
 
     const refs = [createRef(), createRef(), createRef(), createRef()];
 
@@ -68,7 +63,18 @@ export class ClassForm extends Component {
       <form 
       onSubmit={ (e)=> {
         e.preventDefault(e)
-        onSubmitFunc(true);
+        if(
+          firstNameValid &&
+          lastNameValid &&
+          !emailValid &&
+          !cityValid &&
+          phoneNumberValue.length !== 7
+        ) {
+          onSubmitFunc(false);
+          resetState();
+        } else {
+          onSubmitFunc(true)
+        }
       }}
       >
         <u>
@@ -80,7 +86,7 @@ export class ClassForm extends Component {
           <label>{"First Name"}:</label>
           <input placeholder="Bilbo" 
             onChange={(e) => onChangeState('firstName', e.target.value)}
-            value={isSubmit === true ? "" : firstNameInput}
+            value={firstNameInput}
           />
           
         </div>
@@ -93,7 +99,7 @@ export class ClassForm extends Component {
           <label>{"Last Name"}:</label>
           <input placeholder="Baggins" 
           onChange={(e) => onChangeState("lastName", e.target.value)}
-          value={isSubmit === true ? "" : lastNameInput}
+          value={lastNameInput}
           />
         </div>
         {showLastNameError &&(
@@ -105,7 +111,7 @@ export class ClassForm extends Component {
           <label>{"Email"}:</label>
           <input placeholder="bilbo-baggins@adventurehobbits.net" 
           onChange={(e) => onChangeState("email", e.target.value)}
-          value={isSubmit === true ? "" : emailInput}
+          value={emailInput}
           />
         </div>
         {showEmailError && (
@@ -117,7 +123,7 @@ export class ClassForm extends Component {
           <label>{"City"}:</label>
           <input placeholder="Hobbiton" 
           onChange={(e) => onChangeState("city", e.target.value)}
-          value={isSubmit === true ? "" : cityInput}
+          value={cityInput}
           />
         </div>
         {showCityError && (
@@ -128,25 +134,25 @@ export class ClassForm extends Component {
           <label htmlFor="phone">Phone:</label>
           <div id="phone-input-wrap">
             <input type="text" id="phone-input-1" placeholder="55" 
-            value={isSubmit === true? '' : phoneNumberInput[0]}
+            value={phoneNumberInput[0]}
             onChange={createOnChangeHandler(0, 'phoneNumber')}
             ref={ref0}
             />
             -
             <input type="text" id="phone-input-2" placeholder="55" 
-            value={isSubmit === true? '' : phoneNumberInput[1]}
+            value={phoneNumberInput[1]}
             onChange={createOnChangeHandler(1, 'phoneNumber')}
             ref={ref1}
             />
             -
             <input type="text" id="phone-input-3" placeholder="55" 
-            value={isSubmit === true? '' : phoneNumberInput[2]}
+            value={phoneNumberInput[2]}
             onChange={createOnChangeHandler(2, 'phoneNumber')}
             ref={ref2}
             />
             -
             <input type="text" id="phone-input-4" placeholder="5" 
-            value={isSubmit === true? '' : phoneNumberInput[3]}
+            value={phoneNumberInput[3]}
             onChange={createOnChangeHandler(3, 'phoneNumber')}
             ref={ref3}
             />

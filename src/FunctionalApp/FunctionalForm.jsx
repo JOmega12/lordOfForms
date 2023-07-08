@@ -65,16 +65,30 @@ export const FunctionalForm = ({
     setPhoneInputState(newState);
   };
 
+  const resetForm = () => {
+    setFirstNameInput("");
+    setLastNameInput("");
+    setEmailInput("");
+    setCityInput("");
+    setPhoneInputState(["", "", "", ""]);
+  }
+
   return (
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        setIsSubmit(true);
-        // setFirstNameInput('');
-        // setLastNameInput('');
-        // setEmailInput('');
-        // setCityInput('');
-        // setPhoneInputState(['', '', '', '']);
+        if (
+          firstNameValid &&
+          lastNameValid &&
+          !emailValid &&
+          !cityValid &&
+          phoneNumberValue.length !== 7
+        ) {
+          setIsSubmit(false);
+          resetForm();
+        } else {
+          setIsSubmit(true);
+        }
       }}
     >
       <u>
@@ -87,7 +101,8 @@ export const FunctionalForm = ({
         <input
           placeholder="Bilbo"
           onChange={(e) => setFirstNameInput(e.target.value)}
-          value={isSubmit === true ? "" : firstNameInput}
+          // value={isSubmit === true ? "" : firstNameInput}
+          value={firstNameInput}
         />
       </div>
       {showFirstNameError && (
@@ -103,7 +118,7 @@ export const FunctionalForm = ({
         <input
           placeholder="Baggins"
           onChange={(e) => setLastNameInput(e.target.value)}
-          value={isSubmit === true ? "" : lastNameInput}
+          value={lastNameInput}
         />
       </div>
       {showLastNameError && (
@@ -116,7 +131,7 @@ export const FunctionalForm = ({
         <input
           placeholder="bilbo-baggins@adventurehobbits.net"
           onChange={(e) => setEmailInput(e.target.value)}
-          value={isSubmit === true ? "" : emailInput}
+          value={emailInput}
         />
       </div>
       {showEmailError && (
@@ -129,7 +144,7 @@ export const FunctionalForm = ({
         <input
           placeholder="Hobbiton"
           onChange={(e) => setCityInput(e.target.value)}
-          value={isSubmit === true ? "" : cityInput}
+          value={cityInput}
         />
       </div>
       {showCityError && (
@@ -143,7 +158,7 @@ export const FunctionalForm = ({
             type="text"
             id="phone-input-1"
             placeholder="55"
-            value={isSubmit === true ? "" : phoneInputState[0].slice(0, 2)}
+            value={phoneInputState[0].slice(0, 2)}
             onChange={createOnChangeHandler(0)}
             ref={ref0}
           />
@@ -152,7 +167,7 @@ export const FunctionalForm = ({
             type="text"
             id="phone-input-2"
             placeholder="55"
-            value={isSubmit === true ? "" : phoneInputState[1].slice(0, 2)}
+            value={phoneInputState[1].slice(0, 2)}
             onChange={createOnChangeHandler(1)}
             ref={ref1}
           />
@@ -161,7 +176,7 @@ export const FunctionalForm = ({
             type="text"
             id="phone-input-3"
             placeholder="55"
-            value={isSubmit === true ? "" : phoneInputState[2].slice(0, 2)}
+            value={phoneInputState[2].slice(0, 2)}
             onChange={createOnChangeHandler(2)}
             ref={ref2}
           />
@@ -170,7 +185,7 @@ export const FunctionalForm = ({
             type="text"
             id="phone-input-4"
             placeholder="5"
-            value={isSubmit === true ? "" : phoneInputState[3].slice(0, 2)}
+            value={phoneInputState[3].slice(0, 2)}
             onChange={createOnChangeHandler(3)}
             ref={ref3}
           />
