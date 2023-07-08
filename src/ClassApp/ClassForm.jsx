@@ -9,7 +9,6 @@ const phoneNumberErrorMessage = "Invalid Phone Number";
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const cityRegex = /^[a-zA-Z\s]+$/;
-//currently need to put the data when submitted from classApp to profile
 export class ClassForm extends Component {
   render() {
     const {emailInput,firstNameInput, lastNameInput, phoneNumberInput, cityInput, isSubmit, onChangeState, onSubmitFunc, resetState} = this.props;
@@ -27,7 +26,6 @@ export class ClassForm extends Component {
     const cityValid = cityRegex.test(cityInput);
     const phoneNumberValue = phoneNumberInput.join("");
   
-    // console.log(phoneNumberInput, 'phonenumberinput')
     const showFirstNameError = isSubmit && firstNameValid;
     const showLastNameError = isSubmit && lastNameValid;
     const showEmailError = isSubmit && !emailValid;
@@ -54,8 +52,6 @@ export class ClassForm extends Component {
       if (shouldGoPrevRef) {
         prevRef.focus();
       }
-      // setPhoneInputState(newState);
-      // this.setState({phoneNumberInput: newState})
       onChangeState(stateKey, newState);
     };
 

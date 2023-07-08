@@ -21,7 +21,6 @@ export const ProfileInformation = ({ userData, isSubmit }) => {
       </>
     );
   }
-  // eslint-disable-next-line no-unused-vars
   const { email, firstName, lastName, phoneNumber , city } = userData;
   return (
     <>
@@ -33,8 +32,6 @@ export const ProfileInformation = ({ userData, isSubmit }) => {
         <InfoRow label="First Name" value={isSubmit? firstName : 'default'} />
         <InfoRow label="Last Name" value={isSubmit? lastName : 'default'} />
         <InfoRow label="City" value={isSubmit? city : 'default'} />
-        {/* You will need to format the string "nnnnnnn" as "nn-nn-nn-n" */}
-        {/* <InfoRow label="Phone" value={formatPhoneNumber(phoneInput)} /> */}
         <InfoRow label="Phone" value={isSubmit? `${phoneNumber[0]}-${phoneNumber[1]}-${phoneNumber[2]}-${phoneNumber[3]}` : 'default'} />
       </div>
     </>

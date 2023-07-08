@@ -45,11 +45,10 @@ export class ClassApp extends Component {
         <h2>Class</h2>
         <ProfileInformation
           userData={
-            // toggle the following lines to change
-            // null
             isSubmit ? { ...this.state } : defaultUser
           }
           isSubmit={isSubmit}
+          defaultUser={defaultUser}
         />
         <ClassForm emailInput={email} firstNameInput={firstName} lastNameInput={lastName} phoneNumberInput={phoneNumber} cityInput ={city} isSubmit={isSubmit}
         onChangeState={this.onChangeState}
