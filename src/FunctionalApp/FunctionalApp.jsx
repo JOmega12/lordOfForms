@@ -10,6 +10,12 @@ export const FunctionalApp = () => {
   const [phoneInputState, setPhoneInputState] = useState(["", "", "", ""]);
   const [isSubmit, setIsSubmit] = useState(false);
 
+  const [submittedUserData, setSubmittedUserData] = useState({});
+
+  //something about userData being the state
+  // i know that the logic is that when I press the submit button,
+  //it would show the info but it wouldnt update.
+  //but how?
   const userData = {
     email: emailInput,
     firstName: firstNameInput,
@@ -18,24 +24,48 @@ export const FunctionalApp = () => {
     phoneNumber: phoneInputState,
   };
 
+
   return (
     <>
       <h2>Functional</h2>
-      <ProfileInformation userData={userData} isSubmit={isSubmit} />
-      <FunctionalForm
-        firstNameInput={firstNameInput}
-        lastNameInput={lastNameInput}
-        emailInput={emailInput}
-        cityInput={cityInput}
-        phoneInputState={phoneInputState}
-        setFirstNameInput={setFirstNameInput}
-        setLastNameInput={setLastNameInput}
-        setEmailInput={setEmailInput}
-        setCityInput={setCityInput}
-        setPhoneInputState={setPhoneInputState}
-        isSubmit={isSubmit}
-        setIsSubmit={setIsSubmit}
-      />
+      {isSubmit ? (
+        <>
+          <ProfileInformation userData={submittedUserData} isSubmit={true} />
+          <FunctionalForm
+            firstNameInput={firstNameInput}
+            lastNameInput={lastNameInput}
+            emailInput={emailInput}
+            cityInput={cityInput}
+            phoneInputState={phoneInputState}
+            setFirstNameInput={setFirstNameInput}
+            setLastNameInput={setLastNameInput}
+            setEmailInput={setEmailInput}
+            setCityInput={setCityInput}
+            setPhoneInputState={setPhoneInputState}
+            isSubmit={isSubmit}
+            setIsSubmit={setIsSubmit}
+            setSubmittedUserData={setSubmittedUserData}
+          />
+        </>
+      ) : (
+        <>
+          <ProfileInformation userData={userData} isSubmit={isSubmit} />
+          <FunctionalForm
+            firstNameInput={firstNameInput}
+            lastNameInput={lastNameInput}
+            emailInput={emailInput}
+            cityInput={cityInput}
+            phoneInputState={phoneInputState}
+            setFirstNameInput={setFirstNameInput}
+            setLastNameInput={setLastNameInput}
+            setEmailInput={setEmailInput}
+            setCityInput={setCityInput}
+            setPhoneInputState={setPhoneInputState}
+            isSubmit={isSubmit}
+            setIsSubmit={setIsSubmit}
+          />
+        </>
+      )}
     </>
   );
 };
