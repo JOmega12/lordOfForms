@@ -41,8 +41,8 @@ export const FunctionalForm = ({
   const ref2 = refs[2];
   const ref3 = refs[3];
 
-  const firstNameValid = firstNameInput.length < 2;
-  const lastNameValid = lastNameInput.length < 2;
+  const firstNameValid = firstNameInput.length <= 2;
+  const lastNameValid = lastNameInput.length <= 2;
 
   // const emailValid = emailRegex.test(emailInput);
   const emailValid = isEmailValid(emailInput)
@@ -53,11 +53,10 @@ export const FunctionalForm = ({
   const showFirstNameError = isSubmit && firstNameValid;
   const showLastNameError = isSubmit && lastNameValid;
 
-  const showEmailError = isSubmit && !emailValid ;
+  const showEmailError = isSubmit && (!emailValid || emailInput.length === 0) ;
   
-  const showCityError = isSubmit && !cityValid;
+  const showCityError = isSubmit && (!cityValid || cityInput.length === 0);
   const showPhoneError = isSubmit && phoneNumberValue.length !== 7;
-
 
 
   const createOnChangeHandler = (index) => (e) => {
@@ -94,9 +93,10 @@ export const FunctionalForm = ({
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     if (
-      firstNameValid &&
-      lastNameValid &&
+      firstNameValid ||
+      lastNameValid ||
       !emailValid ||
       !cityValid ||
       phoneNumberValue.length !== 7
@@ -104,6 +104,7 @@ export const FunctionalForm = ({
       alert('data is not right');
       setSubmittedUserData(null);
       resetForm();
+      return
     } else {
       setSubmittedUserData({
         email: emailInput,
@@ -118,15 +119,14 @@ export const FunctionalForm = ({
   }
 
   console.log(firstNameInput, 'firstname');
-  console.log(lastNameInput, 'lastname');
-  console.log(emailValid, 'emailValid');
-
-  //city valid is showing error because the test is not showing why it's wrong 
-  //basically it has to do with transformations.js 
-  //where the input has to be .tolowerCase()
-  console.log(cityValid, 'cityValid');
-  console.log(phoneNumberValue.length, 'length');
+  // console.log(lastNameInput, 'lastname');
+  // console.log(emailValid, 'emailValid');
+  // console.log(cityValid, 'cityValid');
+  // console.log(phoneNumberValue.length, 'length');
   
+
+  console.log(showFirstNameError, 'fristnameerror');
+  console.log(showEmailError, 'emailerror');
 
   return (
     <form

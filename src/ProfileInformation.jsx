@@ -1,3 +1,5 @@
+// import { capitalize } from "./utils/transformations";
+
 export const InfoRow = ({ label, value }) => {
   return (
     <div>
@@ -22,6 +24,10 @@ export const ProfileInformation = ({ userData, isSubmit }) => {
     );
   }
   const { email, firstName, lastName, phoneNumber , city } = userData;
+
+  // const formattedFirstName = capitalize(firstName);
+  // const formattedLastName = capitalize(lastName);
+  // console.log(formattedFirstName, 'firstname format')
   return (
     <>
       <u>

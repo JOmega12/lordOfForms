@@ -12,10 +12,9 @@ export const FunctionalApp = () => {
 
   const [submittedUserData, setSubmittedUserData] = useState({});
 
-  //something about userData being the state
-  // i know that the logic is that when I press the submit button,
-  //it would show the info but it wouldnt update.
-  //but how?
+
+
+  //currently when the button is clicked and the forms are reset, the input errors come alive. How do I unalive it? 
   const userData = {
     email: emailInput,
     firstName: firstNameInput,
@@ -49,7 +48,10 @@ export const FunctionalApp = () => {
         </>
       ) : (
         <>
-          <ProfileInformation userData={userData} isSubmit={isSubmit} />
+          <ProfileInformation 
+            userData={userData} 
+            isSubmit={isSubmit} 
+          />
           <FunctionalForm
             firstNameInput={firstNameInput}
             lastNameInput={lastNameInput}
@@ -63,6 +65,7 @@ export const FunctionalApp = () => {
             setPhoneInputState={setPhoneInputState}
             isSubmit={isSubmit}
             setIsSubmit={setIsSubmit}
+            setSubmittedUserData={setSubmittedUserData}
           />
         </>
       )}
