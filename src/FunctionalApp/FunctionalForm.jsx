@@ -10,7 +10,7 @@ const cityErrorMessage = "State is Invalid";
 const phoneNumberErrorMessage = "Invalid Phone Number";
 
 // const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const cityRegex = /^[a-zA-Z\s]+$/;
+// const cityRegex = /^[a-zA-Z\s!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]+$/;
 
 
 
@@ -41,23 +41,24 @@ export const FunctionalForm = ({
   const ref2 = refs[2];
   const ref3 = refs[3];
 
-  const firstNameValid = firstNameInput.length <= 2;
-  const lastNameValid = lastNameInput.length <= 2;
+  const firstNameValid = firstNameInput.length > 2;
+  const lastNameValid = lastNameInput.length > 2;
 
   // const emailValid = emailRegex.test(emailInput);
   const emailValid = isEmailValid(emailInput)
 
-  const cityValid = cityRegex.test(cityInput);
-  const phoneNumberValue = phoneInputState.join("");
+  // const cityValid = cityRegex.test(cityInput);
+  const cityValid = cityInput.length > 2;
+  const phoneNumberValue = phoneInputState.join("").length === 7;
 
-  const showFirstNameError = isSubmit && firstNameValid;
+  const showFirstNameError = isSubmit && (!firstNameValid || firstNameInput.length === 0);
   const showLastNameError = isSubmit && lastNameValid;
 
-  const showEmailError = isSubmit && (!emailValid || emailInput.length === 0) ;
+  const showEmailError = isSubmit && !emailValid;
   
-  const showCityError = isSubmit && (!cityValid || cityInput.length === 0);
-  const showPhoneError = isSubmit && phoneNumberValue.length !== 7;
-
+  const showCityError = isSubmit && !cityValid ;
+  const showPhoneError = isSubmit && !phoneNumberValue;
+  // console.log(phoneNumberValue, 'phoneValue')
 
   const createOnChangeHandler = (index) => (e) => {
     const lengths = [2, 2, 2, 1];
@@ -95,8 +96,8 @@ export const FunctionalForm = ({
     e.preventDefault();
 
     if (
-      firstNameValid ||
-      lastNameValid ||
+      !firstNameValid ||
+      !lastNameValid ||
       !emailValid ||
       !cityValid ||
       phoneNumberValue.length !== 7
@@ -118,15 +119,18 @@ export const FunctionalForm = ({
     }
   }
 
-  console.log(firstNameInput, 'firstname');
-  // console.log(lastNameInput, 'lastname');
-  // console.log(emailValid, 'emailValid');
-  // console.log(cityValid, 'cityValid');
-  // console.log(phoneNumberValue.length, 'length');
+  console.log(firstNameValid, 'firstnameValud');
+  console.log(lastNameValid, 'lastname');
+  console.log(emailValid, 'emailValid');
+  console.log(cityValid, 'cityValid');
+  console.log(phoneNumberValue.length, 'length');
   
 
   console.log(showFirstNameError, 'fristnameerror');
+  console.log(showLastNameError, 'lastnameerror');
   console.log(showEmailError, 'emailerror');
+  console.log(showCityError, 'Cityerror');
+  console.log(showPhoneError, 'phoneerror');
 
   return (
     <form
