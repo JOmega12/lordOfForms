@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { ErrorMessage } from "../ErrorMessage";
 import { allCities } from "../utils/all-cities";
 import { isEmailValid } from "../utils/validations";
@@ -8,9 +8,6 @@ const lastNameErrorMessage = "Last name must be at least 2 characters long";
 const emailErrorMessage = "Email is Invalid";
 const cityErrorMessage = "State is Invalid";
 const phoneNumberErrorMessage = "Invalid Phone Number";
-
-// const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-// const cityRegex = /^[a-zA-Z\s!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]+$/;
 
 
 
@@ -34,6 +31,9 @@ export const FunctionalForm = ({
   setIsSubmit,
   setSubmittedUserData,
 }) => {
+
+  const [isSubmitForm, setSubmitForm] = useState(false);
+  
   const refs = [useRef(), useRef(), useRef(), useRef()];
 
   const ref0 = refs[0];
@@ -43,21 +43,18 @@ export const FunctionalForm = ({
 
   const firstNameValid = firstNameInput.length > 2;
   const lastNameValid = lastNameInput.length > 2;
-
-  // const emailValid = emailRegex.test(emailInput);
-  const emailValid = isEmailValid(emailInput)
-
-  // const cityValid = cityRegex.test(cityInput);
+  const emailValid = isEmailValid(emailInput);
   const cityValid = cityInput.length > 2;
   const phoneNumberValue = phoneInputState.join("").length === 7;
 
-  const showFirstNameError = isSubmit && (!firstNameValid || firstNameInput.length === 0);
-  const showLastNameError = isSubmit && lastNameValid;
+  const showFirstNameError = isSubmitForm && !firstNameValid;
+  // (!firstNameValid || firstNameInput.length === 0);
+  const showLastNameError = isSubmitForm && !lastNameValid;
 
-  const showEmailError = isSubmit && !emailValid;
+  const showEmailError = isSubmitForm && !emailValid;
   
-  const showCityError = isSubmit && !cityValid ;
-  const showPhoneError = isSubmit && !phoneNumberValue;
+  const showCityError = isSubmitForm && !cityValid ;
+  const showPhoneError = isSubmitForm && !phoneNumberValue;
   // console.log(phoneNumberValue, 'phoneValue')
 
   const createOnChangeHandler = (index) => (e) => {
@@ -100,11 +97,14 @@ export const FunctionalForm = ({
       !lastNameValid ||
       !emailValid ||
       !cityValid ||
-      phoneNumberValue.length !== 7
+      !phoneNumberValue
     ) {
       alert('data is not right');
+      // setIsSubmit(true);
+      // setIsSubmit(false);
       setSubmittedUserData(null);
-      resetForm();
+      setSubmitForm(true);
+      // resetForm();
       return
     } else {
       setSubmittedUserData({
@@ -115,7 +115,9 @@ export const FunctionalForm = ({
         phoneNumber: phoneInputState,
       });
       setIsSubmit(true);
+      setSubmitForm(false);
       resetForm();
+      // setIsSubmit(false);
     }
   }
 
@@ -123,10 +125,10 @@ export const FunctionalForm = ({
   console.log(lastNameValid, 'lastname');
   console.log(emailValid, 'emailValid');
   console.log(cityValid, 'cityValid');
-  console.log(phoneNumberValue.length, 'length');
+  console.log(phoneNumberValue, 'length');
   
 
-  console.log(showFirstNameError, 'fristnameerror');
+  console.log(showFirstNameError, 'firstnameerror');
   console.log(showLastNameError, 'lastnameerror');
   console.log(showEmailError, 'emailerror');
   console.log(showCityError, 'Cityerror');
