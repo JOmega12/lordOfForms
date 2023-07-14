@@ -9,13 +9,6 @@ const emailErrorMessage = "Email is Invalid";
 const cityErrorMessage = "State is Invalid";
 const phoneNumberErrorMessage = "Invalid Phone Number";
 
-
-
-// then do email test validation
-//then when the input is wrong, it should pop up an
-// alert() showing that the data is bad
-//then do the functions in the transformation file to create the functions necessary to be fixed 
-
 export const FunctionalForm = ({
   firstNameInput,
   setFirstNameInput,
@@ -27,7 +20,6 @@ export const FunctionalForm = ({
   setCityInput,
   phoneInputState,
   setPhoneInputState,
-  isSubmit,
   setIsSubmit,
   setSubmittedUserData,
 }) => {
@@ -100,11 +92,8 @@ export const FunctionalForm = ({
       !phoneNumberValue
     ) {
       alert('data is not right');
-      // setIsSubmit(true);
-      // setIsSubmit(false);
       setSubmittedUserData(null);
       setSubmitForm(true);
-      // resetForm();
       return
     } else {
       setSubmittedUserData({
@@ -117,23 +106,8 @@ export const FunctionalForm = ({
       setIsSubmit(true);
       setSubmitForm(false);
       resetForm();
-      // setIsSubmit(false);
     }
   }
-
-  console.log(firstNameValid, 'firstnameValud');
-  console.log(lastNameValid, 'lastname');
-  console.log(emailValid, 'emailValid');
-  console.log(cityValid, 'cityValid');
-  console.log(phoneNumberValue, 'length');
-  
-
-  console.log(showFirstNameError, 'firstnameerror');
-  console.log(showLastNameError, 'lastnameerror');
-  console.log(showEmailError, 'emailerror');
-  console.log(showCityError, 'Cityerror');
-  console.log(showPhoneError, 'phoneerror');
-
   return (
     <form
       onSubmit={(e) => {handleSubmit(e)}}
@@ -148,7 +122,6 @@ export const FunctionalForm = ({
         <input
           placeholder="Bilbo"
           onChange={(e) => setFirstNameInput(e.target.value)}
-          // value={isSubmit === true ? "" : firstNameInput}
           value={firstNameInput}
         />
       </div>
@@ -187,8 +160,6 @@ export const FunctionalForm = ({
 
       {/* City Input */}
       <div className="input-wrap">
-
-        {/* use this for future use */}
         <label>{"City"}:</label>
         <input
           placeholder="Hobbiton"

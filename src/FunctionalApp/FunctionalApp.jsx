@@ -39,7 +39,6 @@ export const FunctionalApp = () => {
             setEmailInput={setEmailInput}
             setCityInput={setCityInput}
             setPhoneInputState={setPhoneInputState}
-            isSubmit={isSubmit}
             setIsSubmit={setIsSubmit}
             setSubmittedUserData={setSubmittedUserData}
           />
@@ -58,7 +57,6 @@ export const FunctionalApp = () => {
             setEmailInput={setEmailInput}
             setCityInput={setCityInput}
             setPhoneInputState={setPhoneInputState}
-            isSubmit={isSubmit}
             setIsSubmit={setIsSubmit}
             setSubmittedUserData={setSubmittedUserData}
           />

@@ -1,5 +1,7 @@
 import { Component, createRef } from "react";
 import { ErrorMessage } from "../ErrorMessage";
+import { isEmailValid } from "../utils/validations";
+import { allCities } from "../utils/all-cities";
 
 const firstNameErrorMessage = "First name must be at least 2 characters long";
 const lastNameErrorMessage = "Last name must be at least 2 characters long";
@@ -7,11 +9,16 @@ const emailErrorMessage = "Email is Invalid";
 const cityErrorMessage = "State is Invalid";
 const phoneNumberErrorMessage = "Invalid Phone Number";
 
-const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const cityRegex = /^[a-zA-Z\s]+$/;
+
 export class ClassForm extends Component {
+
+  state = {
+    formIsSubmit: false,
+  }
   render() {
-    const {emailInput,firstNameInput, lastNameInput, phoneNumberInput, cityInput, isSubmit, onChangeState, onSubmitFunc, resetState} = this.props;
+    const {formIsSubmit} = this.state;
+
+    const {emailInput,firstNameInput, lastNameInput, phoneNumberInput, cityInput,  onChangeState, onSubmitFunc, resetState, onSubmitUserData} = this.props;
 
     const refs = [createRef(), createRef(), createRef(), createRef()];
 
@@ -20,17 +27,17 @@ export class ClassForm extends Component {
     const ref2 = refs[2];
     const ref3 = refs[3];
   
-    const firstNameValid = firstNameInput.length < 2;
-    const lastNameValid = lastNameInput.length < 2;
-    const emailValid = emailRegex.test(emailInput);
-    const cityValid = cityRegex.test(cityInput);
-    const phoneNumberValue = phoneNumberInput.join("");
+    const firstNameValid = firstNameInput.length > 2;
+    const lastNameValid = lastNameInput.length > 2;
+    const emailValid = isEmailValid(emailInput);
+    const cityValid = cityInput.length > 2;
+    const phoneNumberValue = phoneNumberInput.join("").length === 7;
   
-    const showFirstNameError = isSubmit && firstNameValid;
-    const showLastNameError = isSubmit && lastNameValid;
-    const showEmailError = isSubmit && !emailValid;
-    const showCityError = isSubmit && !cityValid;
-    const showPhoneError = isSubmit && phoneNumberValue.length !== 7;
+    const showFirstNameError = formIsSubmit && !firstNameValid;
+    const showLastNameError = formIsSubmit && !lastNameValid;
+    const showEmailError = formIsSubmit && !emailValid;
+    const showCityError = formIsSubmit && !cityValid;
+    const showPhoneError = formIsSubmit && !phoneNumberValue;
   
     const createOnChangeHandler = (index, stateKey) => (e) => {
       const lengths = [2, 2, 2, 1];
@@ -60,16 +67,27 @@ export class ClassForm extends Component {
       onSubmit={ (e)=> {
         e.preventDefault(e)
         if(
-          firstNameValid &&
-          lastNameValid &&
+          !firstNameValid &&
+          !lastNameValid &&
           !emailValid &&
           !cityValid &&
-          phoneNumberValue.length !== 7
+          !phoneNumberValue
         ) {
-          onSubmitFunc(false);
+          alert('data is not right');
+          onSubmitUserData(null);
+          this.setState({formIsSubmit: true});
           resetState();
         } else {
-          onSubmitFunc(true)
+          onSubmitUserData({
+            email: emailInput,
+            firstName: firstNameInput,
+            lastName: lastNameInput,
+            city: cityInput,
+            phoneNumber: phoneNumberInput,
+          });
+          onSubmitFunc(true);
+          this.setState({formIsSubmit: false});
+          resetState();
         }
       }}
       >
@@ -120,7 +138,13 @@ export class ClassForm extends Component {
           <input placeholder="Hobbiton" 
           onChange={(e) => onChangeState("city", e.target.value)}
           value={cityInput}
+          list='cityOptions'
           />
+          <datalist id="cityOptions">
+            {allCities.map((item)=> (
+              <option value={item} key ={item}></option>
+            ))}
+          </datalist>
         </div>
         {showCityError && (
         <ErrorMessage message={cityErrorMessage} show={showCityError} />
