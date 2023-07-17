@@ -2,6 +2,8 @@ import { useRef, useState } from "react";
 import { ErrorMessage } from "../ErrorMessage";
 import { allCities } from "../utils/all-cities";
 import { isEmailValid } from "../utils/validations";
+import { PhoneInput } from "../PhoneInput";
+import { TextInput } from "../TextInput";
 
 const firstNameErrorMessage = "First name must be at least 2 characters long";
 const lastNameErrorMessage = "Last name must be at least 2 characters long";
@@ -23,9 +25,8 @@ export const FunctionalForm = ({
   setIsSubmit,
   setSubmittedUserData,
 }) => {
-
   const [isSubmitForm, setSubmitForm] = useState(false);
-  
+
   const refs = [useRef(), useRef(), useRef(), useRef()];
 
   const ref0 = refs[0];
@@ -36,7 +37,7 @@ export const FunctionalForm = ({
   const firstNameValid = firstNameInput.length > 2;
   const lastNameValid = lastNameInput.length > 2;
   const emailValid = isEmailValid(emailInput);
-  const cityValid = cityInput.length > 2;
+  const cityValid = allCities.includes(cityInput);
   const phoneNumberValue = phoneInputState.join("").length === 7;
 
   const showFirstNameError = isSubmitForm && !firstNameValid;
@@ -44,8 +45,8 @@ export const FunctionalForm = ({
   const showLastNameError = isSubmitForm && !lastNameValid;
 
   const showEmailError = isSubmitForm && !emailValid;
-  
-  const showCityError = isSubmitForm && !cityValid ;
+
+  const showCityError = isSubmitForm && !cityValid;
   const showPhoneError = isSubmitForm && !phoneNumberValue;
   // console.log(phoneNumberValue, 'phoneValue')
 
@@ -79,7 +80,7 @@ export const FunctionalForm = ({
     setCityInput("");
     setPhoneInputState(["", "", "", ""]);
     // setIsSubmit(false);
-  }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -91,10 +92,10 @@ export const FunctionalForm = ({
       !cityValid ||
       !phoneNumberValue
     ) {
-      alert('data is not right');
+      alert("data is not right");
       setSubmittedUserData(null);
       setSubmitForm(true);
-      return
+      return;
     } else {
       setSubmittedUserData({
         email: emailInput,
@@ -107,10 +108,13 @@ export const FunctionalForm = ({
       setSubmitForm(false);
       resetForm();
     }
-  }
+  };
+
   return (
     <form
-      onSubmit={(e) => {handleSubmit(e)}}
+      onSubmit={(e) => {
+        handleSubmit(e);
+      }}
     >
       <u>
         <h3>User Information Form</h3>
@@ -118,8 +122,8 @@ export const FunctionalForm = ({
 
       {/* first name input */}
       <div className="input-wrap">
-        <label>{"First Name"}:</label>
-        <input
+        <TextInput
+          label='First Name'
           placeholder="Bilbo"
           onChange={(e) => setFirstNameInput(e.target.value)}
           value={firstNameInput}
@@ -134,8 +138,8 @@ export const FunctionalForm = ({
 
       {/* last name input */}
       <div className="input-wrap">
-        <label>{"Last Name"}:</label>
-        <input
+        <TextInput
+          label='Last Name'
           placeholder="Baggins"
           onChange={(e) => setLastNameInput(e.target.value)}
           value={lastNameInput}
@@ -147,11 +151,11 @@ export const FunctionalForm = ({
 
       {/* Email Input */}
       <div className="input-wrap">
-        <label>{"Email"}:</label>
-        <input
+        <TextInput
+          label='Email'
           placeholder="bilbo-baggins@adventurehobbits.net"
           onChange={(e) => setEmailInput(e.target.value)}
-          value={emailInput}
+          value={lastNameInput}
         />
       </div>
       {showEmailError && (
@@ -160,16 +164,23 @@ export const FunctionalForm = ({
 
       {/* City Input */}
       <div className="input-wrap">
-        <label>{"City"}:</label>
+        {/* <label>{"City"}:</label>
         <input
           placeholder="Hobbiton"
           onChange={(e) => setCityInput(e.target.value)}
           value={cityInput}
-          list='cityOptions'
+          list="cityOptions"
+        /> */}
+        <TextInput
+          label='City'
+          placeholder="Hobbiton"
+          onChange={(e) => setCityInput(e.target.value)}
+          value={cityInput}
+          list="cityOptions"
         />
-        <datalist id='cityOptions'>
-          {allCities.map((item)=> (
-            <option value={item} key={item}/>
+        <datalist id="cityOptions">
+          {allCities.map((item) => (
+            <option value={item} key={item} />
           ))}
         </datalist>
       </div>
@@ -180,40 +191,37 @@ export const FunctionalForm = ({
       <div className="input-wrap">
         <label htmlFor="phone">Phone:</label>
         <div id="phone-input-wrap">
-          <input
-            type="text"
+          <PhoneInput
             id="phone-input-1"
             placeholder="55"
             value={phoneInputState[0].slice(0, 2)}
             onChange={createOnChangeHandler(0)}
-            ref={ref0}
+            reference={ref0}
           />
           -
-          <input
-            type="text"
+          <PhoneInput
             id="phone-input-2"
             placeholder="55"
             value={phoneInputState[1].slice(0, 2)}
             onChange={createOnChangeHandler(1)}
-            ref={ref1}
+            reference={ref1}
           />
           -
-          <input
-            type="text"
+          <PhoneInput
             id="phone-input-3"
             placeholder="55"
             value={phoneInputState[2].slice(0, 2)}
             onChange={createOnChangeHandler(2)}
-            ref={ref2}
+            reference={ref2}
           />
           -
-          <input
+          <PhoneInput
             type="text"
             id="phone-input-4"
             placeholder="5"
             value={phoneInputState[3].slice(0, 2)}
             onChange={createOnChangeHandler(3)}
-            ref={ref3}
+            reference={ref3}
           />
         </div>
       </div>
