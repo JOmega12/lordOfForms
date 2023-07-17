@@ -2,8 +2,8 @@ import { useRef, useState } from "react";
 import { ErrorMessage } from "../ErrorMessage";
 import { allCities } from "../utils/all-cities";
 import { isEmailValid } from "../utils/validations";
-import { PhoneInput } from "../PhoneInput";
-import { TextInput } from "../TextInput";
+import { PhoneInput } from "./PhoneInput";
+import { TextInput } from "./TextInput";
 
 const firstNameErrorMessage = "First name must be at least 2 characters long";
 const lastNameErrorMessage = "Last name must be at least 2 characters long";
@@ -37,7 +37,7 @@ export const FunctionalForm = ({
   const firstNameValid = firstNameInput.length > 2;
   const lastNameValid = lastNameInput.length > 2;
   const emailValid = isEmailValid(emailInput);
-  const cityValid = allCities.includes(cityInput);
+  const isValidCity = allCities.includes(cityInput);
   const phoneNumberValue = phoneInputState.join("").length === 7;
 
   const showFirstNameError = isSubmitForm && !firstNameValid;
@@ -46,7 +46,7 @@ export const FunctionalForm = ({
 
   const showEmailError = isSubmitForm && !emailValid;
 
-  const showCityError = isSubmitForm && !cityValid;
+  const showCityError = isSubmitForm && !isValidCity;
   const showPhoneError = isSubmitForm && !phoneNumberValue;
   // console.log(phoneNumberValue, 'phoneValue')
 
@@ -56,6 +56,7 @@ export const FunctionalForm = ({
     const nextRef = refs[index + 1]?.current;
     const prevRef = refs[index - 1]?.current;
     let value = e.target.value;
+    value = value.replace(/[^0-9]/g, '');
     value = value.slice(0, currentMaxLength);
     const shouldGoNextRef = currentMaxLength === value.length && nextRef;
     const shouldGoPrevRef = value.length === 0 && prevRef;
@@ -89,7 +90,7 @@ export const FunctionalForm = ({
       !firstNameValid ||
       !lastNameValid ||
       !emailValid ||
-      !cityValid ||
+      !isValidCity ||
       !phoneNumberValue
     ) {
       alert("data is not right");
@@ -164,13 +165,6 @@ export const FunctionalForm = ({
 
       {/* City Input */}
       <div className="input-wrap">
-        {/* <label>{"City"}:</label>
-        <input
-          placeholder="Hobbiton"
-          onChange={(e) => setCityInput(e.target.value)}
-          value={cityInput}
-          list="cityOptions"
-        /> */}
         <TextInput
           label='City'
           placeholder="Hobbiton"
@@ -192,6 +186,7 @@ export const FunctionalForm = ({
         <label htmlFor="phone">Phone:</label>
         <div id="phone-input-wrap">
           <PhoneInput
+            type="text"
             id="phone-input-1"
             placeholder="55"
             value={phoneInputState[0].slice(0, 2)}
@@ -200,6 +195,7 @@ export const FunctionalForm = ({
           />
           -
           <PhoneInput
+            type="text"
             id="phone-input-2"
             placeholder="55"
             value={phoneInputState[1].slice(0, 2)}
@@ -208,6 +204,7 @@ export const FunctionalForm = ({
           />
           -
           <PhoneInput
+            type="text"
             id="phone-input-3"
             placeholder="55"
             value={phoneInputState[2].slice(0, 2)}

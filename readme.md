@@ -40,17 +40,17 @@ To get this project setup, you should:
 
 ## Standard Requirements
 
-- [] Setup eslint
-- [] Pass all linting checks
+- [x] Setup eslint
+- [x] Pass all linting checks
 
 - To check if linting passes, run `npm run lint`
 
-- [] Format code with prettier
-- [] State should not be duplicated
-- [] Variables should be named logically
-- [] No unnecessary console logs
-- [] No commented out blocks of code (Code comments are fine)
-- [] Setup a github repository with your submission as the `main` branch, you will submit a link to this for grading (NOT A ZIP FILE)
+- [x] Format code with prettier
+- [x] State should not be duplicated
+- [x] Variables should be named logically
+- [x] No unnecessary console logs
+- [x] No commented out blocks of code (Code comments are fine)
+- [x] Setup a github repository with your submission as the `main` branch, you will submit a link to this for grading (NOT A ZIP FILE)
 
 ## Assignment Specific Requirements
 
@@ -82,24 +82,24 @@ Phone Number UI
 
 Phone Input
 
-- [] Create a `FunctionalPhoneInput` component to clean up code
+- [x] Create a `FunctionalPhoneInput` component to clean up code
 - [] Create a `ClassPhoneInput` component to clean up code
-- [] The telephone input should work EXACTLY like on the example site
-- [] Typing in the max characters on one input should move to the next input
-- [] Deleting should go to the previous input as necessary
-- [] Inputs should be tracked with a state that looks like this ["", "", "", ""]
-- [] A User cannot type any non-numeric characters into a telephone input
+- [x] The telephone input should work EXACTLY like on the example site
+- [x] Typing in the max characters on one input should move to the next input
+- [x] Deleting should go to the previous input as necessary
+- [x] Inputs should be tracked with a state that looks like this ["", "", "", ""]
+- [x] A User cannot type any non-numeric characters into a telephone input
 
 City Information
 
-- [] A valid city should be in the list of `allCites` found in `all-cities.ts`
-- [] A valid city does NOT have to be the same casing,"Hobbiton" or "hobbiton" should pass validation
-- [] Make a `isValidCity` function that checks to see if an input is a valid city
+- [x] A valid city should be in the list of `allCites` found in `all-cities.ts`
+- [x] A valid city does NOT have to be the same casing,"Hobbiton" or "hobbiton" should pass validation
+- [x] Make a `isValidCity` function that checks to see if an input is a valid city
 
 Text Inputs
 
-- [ ] Create a `FunctionalTextInput` component that groups the label and the input together
-- [ ] Create a `ClassTextInput` component to clean up code
+- [x] Create a `FunctionalTextInput` component that groups the label and the input together
+- [x] Create a `ClassTextInput` component to clean up code
 
 Form
 
