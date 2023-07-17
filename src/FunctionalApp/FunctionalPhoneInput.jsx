@@ -1,6 +1,6 @@
 
 
-export const PhoneInput = ({type, id, placeholder, value, onChange, reference}) => 
+export const FunctionalPhoneInput = ({type, id, placeholder, value, onChange, reference}) => 
 {
    return (
          <input

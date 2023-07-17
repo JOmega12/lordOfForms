@@ -1,6 +1,6 @@
 
 
-export const TextInput= ({label, placeholder, onChange, value, list}) => {
+export const FunctionalTextInput= ({label, placeholder, onChange, value, list}) => {
    return(
       <>
          <label>{label}:</label>

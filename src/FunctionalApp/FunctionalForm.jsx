@@ -2,8 +2,8 @@ import { useRef, useState } from "react";
 import { ErrorMessage } from "../ErrorMessage";
 import { allCities } from "../utils/all-cities";
 import { isEmailValid } from "../utils/validations";
-import { PhoneInput } from "./PhoneInput";
-import { TextInput } from "./TextInput";
+import { FunctionalPhoneInput } from "./FunctionalPhoneInput";
+import { FunctionalTextInput } from "./FunctionalTextInput";
 
 const firstNameErrorMessage = "First name must be at least 2 characters long";
 const lastNameErrorMessage = "Last name must be at least 2 characters long";
@@ -123,7 +123,7 @@ export const FunctionalForm = ({
 
       {/* first name input */}
       <div className="input-wrap">
-        <TextInput
+        <FunctionalTextInput
           label='First Name'
           placeholder="Bilbo"
           onChange={(e) => setFirstNameInput(e.target.value)}
@@ -139,7 +139,7 @@ export const FunctionalForm = ({
 
       {/* last name input */}
       <div className="input-wrap">
-        <TextInput
+        <FunctionalTextInput
           label='Last Name'
           placeholder="Baggins"
           onChange={(e) => setLastNameInput(e.target.value)}
@@ -152,7 +152,7 @@ export const FunctionalForm = ({
 
       {/* Email Input */}
       <div className="input-wrap">
-        <TextInput
+        <FunctionalTextInput
           label='Email'
           placeholder="bilbo-baggins@adventurehobbits.net"
           onChange={(e) => setEmailInput(e.target.value)}
@@ -165,7 +165,7 @@ export const FunctionalForm = ({
 
       {/* City Input */}
       <div className="input-wrap">
-        <TextInput
+        <FunctionalTextInput
           label='City'
           placeholder="Hobbiton"
           onChange={(e) => setCityInput(e.target.value)}
@@ -185,7 +185,7 @@ export const FunctionalForm = ({
       <div className="input-wrap">
         <label htmlFor="phone">Phone:</label>
         <div id="phone-input-wrap">
-          <PhoneInput
+          <FunctionalPhoneInput
             type="text"
             id="phone-input-1"
             placeholder="55"
@@ -194,7 +194,7 @@ export const FunctionalForm = ({
             reference={ref0}
           />
           -
-          <PhoneInput
+          <FunctionalPhoneInput
             type="text"
             id="phone-input-2"
             placeholder="55"
@@ -203,7 +203,7 @@ export const FunctionalForm = ({
             reference={ref1}
           />
           -
-          <PhoneInput
+          <FunctionalPhoneInput
             type="text"
             id="phone-input-3"
             placeholder="55"
@@ -212,7 +212,7 @@ export const FunctionalForm = ({
             reference={ref2}
           />
           -
-          <PhoneInput
+          <FunctionalPhoneInput
             type="text"
             id="phone-input-4"
             placeholder="5"
