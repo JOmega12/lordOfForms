@@ -11,10 +11,14 @@ export const capitalize = (input) => {
 }
 
 export const formatPhoneNumber = (phoneNumber) => {
-    // todo: build this function
-    // `formatPhoneNumber("1234567")` should be `"12-34-56-7"`
-    if (!phoneNumber || phoneNumber.length < 2) {
-        return phoneNumber; // Return original value if invalid
-      }
-    return phoneNumber.replace(/(\d{2})(?=\d{2,})/g, '$1-');
+  // todo: build this function
+  // `formatPhoneNumber("1234567")` should be `"12-34-56-7"`
+  if (!phoneNumber || phoneNumber.length < 2) {
+    return phoneNumber; // Return original value if invalid
+  }
+  const firstPart = phoneNumber.slice(0, 1);
+  const secondPart = phoneNumber.slice(1, 2);
+  const thirdPart = phoneNumber.slice(2, 3);
+  const fourthPart = phoneNumber.slice(3);
+  return `${firstPart}-${secondPart}-${thirdPart}-${fourthPart}`;
 }

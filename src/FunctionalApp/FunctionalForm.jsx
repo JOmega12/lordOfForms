@@ -156,7 +156,7 @@ export const FunctionalForm = ({
           label='Email'
           placeholder="bilbo-baggins@adventurehobbits.net"
           onChange={(e) => setEmailInput(e.target.value)}
-          value={lastNameInput}
+          value={emailInput}
         />
       </div>
       {showEmailError && (

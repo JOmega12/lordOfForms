@@ -99,7 +99,7 @@ City Information
 Text Inputs
 
 - [x] Create a `FunctionalTextInput` component that groups the label and the input together
-- [x] Create a `ClassTextInput` component to clean up code
+- [] Create a `ClassTextInput` component to clean up code
 
 Form
 
@@ -112,7 +112,7 @@ Profile Information Component
 - [x]build a `capitalize` function in `transformations.ts` to correctly display a first and last name
 
 - [x] build a `formatPhone` function in `transformations.ts` that will turn "1234567" into "12-34-56-7"
-- [] use `capitalize` and `formatPHone` in the `ProfileInformation` component in order to format things appropriately
+- [x] use `capitalize` and `formatPHone` in the `ProfileInformation` component in order to format things appropriately
 
 Email Validations
 
