@@ -2,6 +2,8 @@ import { Component, createRef } from "react";
 import { ErrorMessage } from "../ErrorMessage";
 import { isEmailValid } from "../utils/validations";
 import { allCities } from "../utils/all-cities";
+import { ClassPhoneInput } from "./ClassPhoneInput";
+import { ClassTextInput } from "./ClassTextInput";
 
 const firstNameErrorMessage = "First name must be at least 2 characters long";
 const lastNameErrorMessage = "Last name must be at least 2 characters long";
@@ -30,13 +32,13 @@ export class ClassForm extends Component {
     const firstNameValid = firstNameInput.length > 2;
     const lastNameValid = lastNameInput.length > 2;
     const emailValid = isEmailValid(emailInput);
-    const cityValid = cityInput.length > 2;
+    const isValidCity = allCities.includes(cityInput);
     const phoneNumberValue = phoneNumberInput.join("").length === 7;
   
     const showFirstNameError = formIsSubmit && !firstNameValid;
     const showLastNameError = formIsSubmit && !lastNameValid;
     const showEmailError = formIsSubmit && !emailValid;
-    const showCityError = formIsSubmit && !cityValid;
+    const showCityError = formIsSubmit && !isValidCity;
     const showPhoneError = formIsSubmit && !phoneNumberValue;
   
     const createOnChangeHandler = (index, stateKey) => (e) => {
@@ -70,7 +72,7 @@ export class ClassForm extends Component {
           !firstNameValid &&
           !lastNameValid &&
           !emailValid &&
-          !cityValid &&
+          !isValidCity &&
           !phoneNumberValue
         ) {
           alert('data is not right');
@@ -97,8 +99,15 @@ export class ClassForm extends Component {
 
         {/* first name input */}
         <div className="input-wrap">
-          <label>{"First Name"}:</label>
-          <input placeholder="Bilbo" 
+          {/* <label>{"First Name"}:</label>
+          <input 
+            placeholder="Bilbo" 
+            onChange={(e) => onChangeState('firstName', e.target.value)}
+            value={firstNameInput}
+          /> */}
+          <ClassTextInput
+            label= "First Name"
+            placeholder="Bilbo" 
             onChange={(e) => onChangeState('firstName', e.target.value)}
             value={firstNameInput}
           />
@@ -110,10 +119,16 @@ export class ClassForm extends Component {
 
         {/* last name input */}
         <div className="input-wrap">
-          <label>{"Last Name"}:</label>
+          {/* <label>{"Last Name"}:</label>
           <input placeholder="Baggins" 
           onChange={(e) => onChangeState("lastName", e.target.value)}
           value={lastNameInput}
+          /> */}
+          <ClassTextInput
+            label= "Last Name"
+            placeholder="Baggins" 
+            onChange={(e) => onChangeState('lastName', e.target.value)}
+            value={lastNameInput}
           />
         </div>
         {showLastNameError &&(
@@ -122,10 +137,16 @@ export class ClassForm extends Component {
 
         {/* Email Input */}
         <div className="input-wrap">
-          <label>{"Email"}:</label>
+          {/* <label>{"Email"}:</label>
           <input placeholder="bilbo-baggins@adventurehobbits.net" 
           onChange={(e) => onChangeState("email", e.target.value)}
           value={emailInput}
+          /> */}
+          <ClassTextInput
+            label= "Email"
+            placeholder="bilbo-baggins@adventurehobbits.net" 
+            onChange={(e) => onChangeState("email", e.target.value)}
+            value={emailInput}
           />
         </div>
         {showEmailError && (
@@ -134,11 +155,19 @@ export class ClassForm extends Component {
 
         {/* City Input */}
         <div className="input-wrap">
-          <label>{"City"}:</label>
+          {/* <label>{"City"}:</label>
           <input placeholder="Hobbiton" 
           onChange={(e) => onChangeState("city", e.target.value)}
           value={cityInput}
           list='cityOptions'
+          /> */}
+
+          <ClassTextInput
+            label= "City"
+            placeholder="Hobbiton" 
+            onChange={(e) => onChangeState("city", e.target.value)}
+            value={cityInput}
+            list='cityOptions'
           />
           <datalist id="cityOptions">
             {allCities.map((item)=> (
@@ -153,28 +182,32 @@ export class ClassForm extends Component {
         <div className="input-wrap">
           <label htmlFor="phone">Phone:</label>
           <div id="phone-input-wrap">
-            <input type="text" id="phone-input-1" placeholder="55" 
-            value={phoneNumberInput[0]}
-            onChange={createOnChangeHandler(0, 'phoneNumber')}
-            ref={ref0}
+            <ClassPhoneInput 
+              type="text" id="phone-input-1" placeholder="55" 
+              value={phoneNumberInput[0]}
+              onChange={createOnChangeHandler(0, 'phoneNumber')}
+              reference={ref0}
             />
             -
-            <input type="text" id="phone-input-2" placeholder="55" 
-            value={phoneNumberInput[1]}
-            onChange={createOnChangeHandler(1, 'phoneNumber')}
-            ref={ref1}
+            <ClassPhoneInput 
+              type="text" id="phone-input-2" placeholder="55" 
+              value={phoneNumberInput[1]}
+              onChange={createOnChangeHandler(1, 'phoneNumber')}
+              reference={ref1}
             />
             -
-            <input type="text" id="phone-input-3" placeholder="55" 
-            value={phoneNumberInput[2]}
-            onChange={createOnChangeHandler(2, 'phoneNumber')}
-            ref={ref2}
+            <ClassPhoneInput 
+              type="text" id="phone-input-3" placeholder="55" 
+              value={phoneNumberInput[2]}
+              onChange={createOnChangeHandler(2, 'phoneNumber')}
+              reference={ref2}
             />
             -
-            <input type="text" id="phone-input-4" placeholder="5" 
-            value={phoneNumberInput[3]}
-            onChange={createOnChangeHandler(3, 'phoneNumber')}
-            ref={ref3}
+            <ClassPhoneInput
+              type="text" id="phone-input-4" placeholder="5" 
+              value={phoneNumberInput[3]}
+              onChange={createOnChangeHandler(3, 'phoneNumber')}
+              reference={ref3}
             />
           </div>
         </div>
