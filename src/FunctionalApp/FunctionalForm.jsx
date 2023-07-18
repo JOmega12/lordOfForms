@@ -41,7 +41,6 @@ export const FunctionalForm = ({
   const phoneNumberValue = phoneInputState.join("").length === 7;
 
   const showFirstNameError = isSubmitForm && !firstNameValid;
-  // (!firstNameValid || firstNameInput.length === 0);
   const showLastNameError = isSubmitForm && !lastNameValid;
 
   const showEmailError = isSubmitForm && !emailValid;
@@ -56,7 +55,7 @@ export const FunctionalForm = ({
     const nextRef = refs[index + 1]?.current;
     const prevRef = refs[index - 1]?.current;
     let value = e.target.value;
-    value = value.replace(/[^0-9]/g, '');
+    value = value.replace(/[^0-9]/g, "");
     value = value.slice(0, currentMaxLength);
     const shouldGoNextRef = currentMaxLength === value.length && nextRef;
     const shouldGoPrevRef = value.length === 0 && prevRef;
@@ -80,7 +79,6 @@ export const FunctionalForm = ({
     setEmailInput("");
     setCityInput("");
     setPhoneInputState(["", "", "", ""]);
-    // setIsSubmit(false);
   };
 
   const handleSubmit = (e) => {
@@ -124,7 +122,7 @@ export const FunctionalForm = ({
       {/* first name input */}
       <div className="input-wrap">
         <FunctionalTextInput
-          label='First Name'
+          label="First Name"
           placeholder="Bilbo"
           onChange={(e) => setFirstNameInput(e.target.value)}
           value={firstNameInput}
@@ -140,7 +138,7 @@ export const FunctionalForm = ({
       {/* last name input */}
       <div className="input-wrap">
         <FunctionalTextInput
-          label='Last Name'
+          label="Last Name"
           placeholder="Baggins"
           onChange={(e) => setLastNameInput(e.target.value)}
           value={lastNameInput}
@@ -153,7 +151,7 @@ export const FunctionalForm = ({
       {/* Email Input */}
       <div className="input-wrap">
         <FunctionalTextInput
-          label='Email'
+          label="Email"
           placeholder="bilbo-baggins@adventurehobbits.net"
           onChange={(e) => setEmailInput(e.target.value)}
           value={emailInput}
@@ -166,7 +164,7 @@ export const FunctionalForm = ({
       {/* City Input */}
       <div className="input-wrap">
         <FunctionalTextInput
-          label='City'
+          label="City"
           placeholder="Hobbiton"
           onChange={(e) => setCityInput(e.target.value)}
           value={cityInput}

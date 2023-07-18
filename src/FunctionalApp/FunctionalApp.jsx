@@ -12,7 +12,6 @@ export const FunctionalApp = () => {
 
   const [submittedUserData, setSubmittedUserData] = useState({});
 
-
   //currently when the button is clicked and the forms are reset, the input errors come alive. How do I unalive it?
   const userData = {
     email: emailInput,

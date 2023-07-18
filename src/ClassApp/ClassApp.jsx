@@ -59,7 +59,6 @@ export class ClassApp extends Component {
         {isSubmit ? (
           <>
             <ProfileInformation
-              // userData={isSubmit ? { ...this.state } : defaultUser}
               userData={submittedUserData}
               isSubmit={isSubmit}
               defaultUser={defaultUser}
