@@ -99,7 +99,7 @@ City Information
 Text Inputs
 
 - [x] Create a `FunctionalTextInput` component that groups the label and the input together
-- [] Create a `ClassTextInput` component to clean up code
+- [x] Create a `ClassTextInput` component to clean up code
 
 Form
 
