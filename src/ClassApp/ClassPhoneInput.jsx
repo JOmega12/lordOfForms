@@ -43,7 +43,7 @@ export class ClassPhoneInput extends Component {
             id="phone-input-1"
             placeholder="55"
             value={phoneNumberInput[0]}
-            onChange={createOnChangeHandler(0, "phoneNumber")}
+            onChange={createOnChangeHandler(0, "phoneNumberInput")}
             ref={ref0}
           />
           -
@@ -52,7 +52,7 @@ export class ClassPhoneInput extends Component {
             id="phone-input-2"
             placeholder="55"
             value={phoneNumberInput[1]}
-            onChange={createOnChangeHandler(1, "phoneNumber")}
+            onChange={createOnChangeHandler(1, "phoneNumberInput")}
             ref={ref1}
           />
           -
@@ -61,7 +61,7 @@ export class ClassPhoneInput extends Component {
             id="phone-input-3"
             placeholder="55"
             value={phoneNumberInput[2]}
-            onChange={createOnChangeHandler(2, "phoneNumber")}
+            onChange={createOnChangeHandler(2, "phoneNumberInput")}
             ref={ref2}
           />
           -
@@ -70,7 +70,7 @@ export class ClassPhoneInput extends Component {
             id="phone-input-4"
             placeholder="5"
             value={phoneNumberInput[3]}
-            onChange={createOnChangeHandler(3, "phoneNumber")}
+            onChange={createOnChangeHandler(3, "phoneNumberInput")}
             ref={ref3}
           />
         </div>

@@ -1,6 +1,6 @@
 import { Component } from "react";
 import { ErrorMessage } from "../ErrorMessage";
-import { isEmailValid } from "../utils/validations";
+import { isCityValid, isEmailValid, isPhoneValid } from "../utils/validations";
 import { allCities } from "../utils/all-cities";
 import { ClassPhoneInput } from "./ClassPhoneInput";
 import { ClassTextInput } from "./ClassTextInput";
@@ -13,30 +13,45 @@ const phoneNumberErrorMessage = "Invalid Phone Number";
 
 export class ClassForm extends Component {
   state = {
+    emailInput: "",
+    firstNameInput: "",
+    lastNameInput: "",
+    phoneNumberInput: ["", "", "", ""],
+    cityInput: "",
     formIsSubmit: false,
   };
-  render() {
-    const { formIsSubmit } = this.state;
 
+  resetState = () => {
+    this.setState({
+      emailInput: "",
+      firstNameInput: "",
+      lastNameInput: "",
+      phoneNumberInput: ["", "", "", ""],
+      cityInput: "",
+    });
+  };
+
+  onChangeState = (state, value) => {
+    this.setState({ [state]: value });
+  };
+
+  render() {
     const {
-      emailInput,
+      formIsSubmit,
       firstNameInput,
       lastNameInput,
-      phoneNumberInput,
+      emailInput,
       cityInput,
-      onChangeState,
-      onSubmitFunc,
-      resetState,
-      onSubmitUserData,
-    } = this.props;
+      phoneNumberInput,
+    } = this.state;
+
+    const { onSubmitFunc, onSubmitUserData } = this.props;
 
     const firstNameValid = firstNameInput.length > 2;
     const lastNameValid = lastNameInput.length > 2;
     const emailValid = isEmailValid(emailInput);
-    const isValidCity = allCities
-      .map((city) => city.toLowerCase())
-      .includes(cityInput.toLowerCase());
-    const phoneNumberValue = phoneNumberInput.join("").length === 7;
+    const isValidCity = isCityValid(cityInput);
+    const phoneNumberValue = isPhoneValid(phoneNumberInput);
 
     const showFirstNameError = formIsSubmit && !firstNameValid;
     const showLastNameError = formIsSubmit && !lastNameValid;
@@ -58,7 +73,7 @@ export class ClassForm extends Component {
             alert("data is not right");
             onSubmitUserData(null);
             this.setState({ formIsSubmit: true });
-            resetState();
+            this.resetState();
           } else {
             onSubmitUserData({
               email: emailInput,
@@ -69,7 +84,7 @@ export class ClassForm extends Component {
             });
             onSubmitFunc(true);
             this.setState({ formIsSubmit: false });
-            resetState();
+            this.resetState();
           }
         }}
       >
@@ -80,7 +95,7 @@ export class ClassForm extends Component {
         <ClassTextInput
           label="First Name"
           placeholder="Bilbo"
-          onChange={(e) => onChangeState("firstName", e.target.value)}
+          onChange={(e) => this.onChangeState("firstNameInput", e.target.value)}
           value={firstNameInput}
           message={firstNameErrorMessage}
           show={showFirstNameError}
@@ -88,7 +103,7 @@ export class ClassForm extends Component {
         <ClassTextInput
           label="Last Name"
           placeholder="Baggins"
-          onChange={(e) => onChangeState("lastName", e.target.value)}
+          onChange={(e) => this.onChangeState("lastNameInput", e.target.value)}
           value={lastNameInput}
           message={lastNameErrorMessage}
           show={showLastNameError}
@@ -96,7 +111,7 @@ export class ClassForm extends Component {
         <ClassTextInput
           label="Email"
           placeholder="bilbo-baggins@adventurehobbits.net"
-          onChange={(e) => onChangeState("email", e.target.value)}
+          onChange={(e) => this.onChangeState("emailInput", e.target.value)}
           value={emailInput}
           message={emailErrorMessage}
           show={showEmailError}
@@ -104,7 +119,9 @@ export class ClassForm extends Component {
         <ClassTextInput
           label="City"
           placeholder="Hobbiton"
-          onChange={(e) => onChangeState("city", e.target.value.toLowerCase())}
+          onChange={(e) =>
+            this.onChangeState("cityInput", e.target.value.toLowerCase())
+          }
           value={cityInput}
           list="cityOptions"
           message={cityErrorMessage}
@@ -118,7 +135,7 @@ export class ClassForm extends Component {
 
         <ClassPhoneInput
           phoneNumberInput={phoneNumberInput}
-          onChangeState={onChangeState}
+          onChangeState={this.onChangeState}
         />
         {showPhoneError && (
           <ErrorMessage

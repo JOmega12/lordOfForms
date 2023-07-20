@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ErrorMessage } from "../ErrorMessage";
 import { allCities } from "../utils/all-cities";
-import { isEmailValid } from "../utils/validations";
+import { isCityValid, isEmailValid, isPhoneValid } from "../utils/validations";
 import { FunctionalPhoneInput } from "./FunctionalPhoneInput";
 import { FunctionalTextInput } from "./FunctionalTextInput";
 
@@ -11,29 +11,19 @@ const emailErrorMessage = "Email is Invalid";
 const cityErrorMessage = "State is Invalid";
 const phoneNumberErrorMessage = "Invalid Phone Number";
 
-export const FunctionalForm = ({
-  firstNameInput,
-  setFirstNameInput,
-  lastNameInput,
-  setLastNameInput,
-  emailInput,
-  setEmailInput,
-  cityInput,
-  setCityInput,
-  phoneInputState,
-  setPhoneInputState,
-  setIsSubmit,
-  setSubmittedUserData,
-}) => {
+export const FunctionalForm = ({ setIsSubmit, setSubmittedUserData }) => {
+  const [firstNameInput, setFirstNameInput] = useState("");
+  const [lastNameInput, setLastNameInput] = useState("");
+  const [emailInput, setEmailInput] = useState("");
+  const [cityInput, setCityInput] = useState("");
+  const [phoneInputState, setPhoneInputState] = useState(["", "", "", ""]);
   const [isSubmitForm, setSubmitForm] = useState(false);
 
   const firstNameValid = firstNameInput.length > 2;
   const lastNameValid = lastNameInput.length > 2;
   const emailValid = isEmailValid(emailInput);
-  const isValidCity = allCities
-    .map((city) => city.toLowerCase())
-    .includes(cityInput.toLowerCase());
-  const phoneNumberValue = phoneInputState.join("").length === 7;
+  const isValidCity = isCityValid(cityInput);
+  const phoneNumberValue = isPhoneValid(phoneInputState);
 
   const showFirstNameError = isSubmitForm && !firstNameValid;
   const showLastNameError = isSubmitForm && !lastNameValid;

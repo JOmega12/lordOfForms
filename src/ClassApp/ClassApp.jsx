@@ -12,27 +12,8 @@ const defaultUser = {
 
 export class ClassApp extends Component {
   state = {
-    email: "",
-    firstName: "",
-    lastName: "",
-    phoneNumber: ["", "", "", ""],
-    city: "",
     isSubmit: false,
-    submittedUserData: {},
-  };
-
-  resetState = () => {
-    this.setState({
-      email: "",
-      firstName: "",
-      lastName: "",
-      phoneNumber: ["", "", "", ""],
-      city: "",
-    });
-  };
-
-  onChangeState = (state, value) => {
-    this.setState({ [state]: value });
+    submittedUserData: null,
   };
 
   onSubmitFunc = (bool) => {
@@ -44,15 +25,7 @@ export class ClassApp extends Component {
   };
 
   render() {
-    const {
-      email,
-      firstName,
-      lastName,
-      city,
-      phoneNumber,
-      isSubmit,
-      submittedUserData,
-    } = this.state;
+    const { isSubmit, submittedUserData } = this.state;
     return (
       <>
         <h2>Class</h2>
@@ -64,14 +37,7 @@ export class ClassApp extends Component {
               defaultUser={defaultUser}
             />
             <ClassForm
-              emailInput={email}
-              firstNameInput={firstName}
-              lastNameInput={lastName}
-              phoneNumberInput={phoneNumber}
-              cityInput={city}
-              onChangeState={this.onChangeState}
               onSubmitFunc={this.onSubmitFunc}
-              resetState={this.resetState}
               onSubmitUserData={this.onSubmitUserData}
             />
           </>
@@ -83,14 +49,7 @@ export class ClassApp extends Component {
               defaultUser={defaultUser}
             />
             <ClassForm
-              emailInput={email}
-              firstNameInput={firstName}
-              lastNameInput={lastName}
-              phoneNumberInput={phoneNumber}
-              cityInput={city}
-              onChangeState={this.onChangeState}
               onSubmitFunc={this.onSubmitFunc}
-              resetState={this.resetState}
               onSubmitUserData={this.onSubmitUserData}
             />
           </>
