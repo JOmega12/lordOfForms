@@ -38,7 +38,6 @@ export const ProfileInformation = ({ userData, isSubmit }) => {
         <InfoRow label="First Name" value={isSubmit? formattedFirstName : 'default'} />
         <InfoRow label="Last Name" value={isSubmit? formattedLastName : 'default'} />
         <InfoRow label="City" value={isSubmit? city : 'default'} />
-        {/* <InfoRow label="Phone" value={isSubmit? `${phoneNumber[0]}-${phoneNumber[1]}-${phoneNumber[2]}-${phoneNumber[3]}` : 'default'} /> */}
         <InfoRow label="Phone" value={isSubmit? formattedPhoneNumber : 'default'} />
       </div>
     </>

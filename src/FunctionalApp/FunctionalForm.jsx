@@ -30,7 +30,9 @@ export const FunctionalForm = ({
   const firstNameValid = firstNameInput.length > 2;
   const lastNameValid = lastNameInput.length > 2;
   const emailValid = isEmailValid(emailInput);
-  const isValidCity = allCities.map(city => city.toLowerCase()).includes(cityInput.toLowerCase());
+  const isValidCity = allCities
+    .map((city) => city.toLowerCase())
+    .includes(cityInput.toLowerCase());
   const phoneNumberValue = phoneInputState.join("").length === 7;
 
   const showFirstNameError = isSubmitForm && !firstNameValid;
@@ -87,7 +89,7 @@ export const FunctionalForm = ({
         <h3>User Information Form</h3>
       </u>
 
-      <FunctionalTextInput 
+      <FunctionalTextInput
         label="First Name"
         placeholder="Bilbo"
         onChange={(e) => setFirstNameInput(e.target.value)}
@@ -95,7 +97,7 @@ export const FunctionalForm = ({
         message={firstNameErrorMessage}
         show={showFirstNameError}
       />
-      <FunctionalTextInput 
+      <FunctionalTextInput
         label="Last Name"
         placeholder="Baggins"
         onChange={(e) => setLastNameInput(e.target.value)}
@@ -103,7 +105,7 @@ export const FunctionalForm = ({
         message={lastNameErrorMessage}
         show={showLastNameError}
       />
-      <FunctionalTextInput 
+      <FunctionalTextInput
         label="Email"
         placeholder="bilbo-baggins@adventurehobbits.net"
         onChange={(e) => setEmailInput(e.target.value)}
@@ -111,7 +113,7 @@ export const FunctionalForm = ({
         message={emailErrorMessage}
         show={showEmailError}
       />
-      <FunctionalTextInput 
+      <FunctionalTextInput
         label="City"
         placeholder="Hobbiton"
         onChange={(e) => setCityInput(e.target.value.toLowerCase())}
